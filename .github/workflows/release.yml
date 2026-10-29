@@ -1,0 +1,26 @@
+# Attaches HibiraOnline.js to each published GitHub Release. The release tag
+# must be v<version from package.json>, e.g. v0.1.0.
+name: release
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  asset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tag matches package.json version
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+      - run: npm test
+      - run: gh release upload "$GITHUB_REF_NAME" dist/HibiraOnline.js --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
