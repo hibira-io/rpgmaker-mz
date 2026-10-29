@@ -1024,7 +1024,7 @@ if (!window.Pusher) (function (exports, module, define) {
         // Tell the newcomer where we are, and (from the first member) the shared state.
         this.lastMove = '';
         this.sendMove();
-        if (this.isFirst()) this.send(STATE, this.snapshot());
+        if (this.isFirst(m.id)) this.send(STATE, this.snapshot());
       });
       ch.bind('pusher:member_removed', (m) => {
         this.members.delete(m.id);
@@ -1053,9 +1053,9 @@ if (!window.Pusher) (function (exports, module, define) {
       if (P.membersVariable > 0) $gameVariables.setValue(P.membersVariable, connected ? this.members.size + 1 : 0);
     },
 
-    /** The member with the smallest ID sends the shared state to newcomers. */
-    isFirst() {
-      for (const id of this.members.keys()) if (id < this.myId) return false;
+    /** Of the members already here (not the newcomer), the one with the smallest ID sends the shared state. */
+    isFirst(newcomer) {
+      for (const id of this.members.keys()) if (id !== newcomer && id < this.myId) return false;
       return true;
     },
 

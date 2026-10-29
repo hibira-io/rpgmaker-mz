@@ -162,6 +162,11 @@ test('the first member sends the shared state to newcomers', () => {
   t.ctx.$gameMap.update(true);
   const state = ch.sent.find(([e]) => e === 'client-mz-state');
   assert.deepEqual(state[1], { s: [{ k: 's', id: 3, v: true }], v: [{ k: 'v', id: 5, v: 0 }] });
+  // A newcomer whose ID sorts first still gets the state from us.
+  ch.sent.length = 0;
+  ch.emit('pusher:member_added', { id: '0', info: { name: 'Zero' } });
+  t.ctx.$gameMap.update(true);
+  assert.ok(ch.sent.some(([e]) => e === 'client-mz-state'), 'state sent to a newcomer with a smaller ID');
   const t2 = load();
   const ch2 = joined(t2, [{ id: '0', name: 'Old' }]); // '0' < 'a'
   ch2.sent.length = 0;
