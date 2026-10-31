@@ -1,5 +1,7 @@
 # HibiraOnline.js for RPG Maker MZ
 
+![HibiraOnline.js for RPG Maker MZ](.github/cover.jpg)
+
 [![ci](https://github.com/hibira-io/rpgmaker-mz/actions/workflows/ci.yml/badge.svg)](https://github.com/hibira-io/rpgmaker-mz/actions/workflows/ci.yml)
 
 [日本語](#日本語) · English
