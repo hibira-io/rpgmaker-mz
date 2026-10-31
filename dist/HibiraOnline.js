@@ -881,7 +881,7 @@
  * @default 0
  */
 
-// HibiraOnline.js 0.1.0 — https://github.com/hibira-io/rpgmaker-mz (MIT)
+// HibiraOnline.js 0.1.1 — https://github.com/hibira-io/rpgmaker-mz (MIT)
 // Includes pusher-js 8.6.0 (MIT, https://github.com/pusher/pusher-js).
 
 if (!window.Pusher) (function (exports, module, define) {

@@ -1,7 +1,7 @@
 {
   "name": "hibira-rpgmaker-mz",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HibiraOnline.js: online play for RPG Maker MZ on Hibira",
   "type": "module",
   "license": "MIT",
